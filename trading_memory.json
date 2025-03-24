@@ -1,0 +1,45 @@
+{
+    "sniper_actions": [],
+    "volume_bots": [],
+    "signals": [],
+    "market_metrics": {
+        "current_price_sol": 5e-05,
+        "current_price_usd": 0.007138,
+        "liquidity_pool_sol": 5.0,
+        "liquidity_pool_tokens": 100000.0
+    },
+    "wallet_balances": {
+        "Sniper BOt": {
+            "sol_balance": 0,
+            "token_balance": 0
+        },
+        "2": {
+            "sol_balance": 0,
+            "token_balance": 0
+        },
+        "3": {
+            "sol_balance": 0,
+            "token_balance": 0
+        },
+        "4": {
+            "sol_balance": 0,
+            "token_balance": 0
+        },
+        "5": {
+            "sol_balance": 0,
+            "token_balance": 0
+        },
+        "6": {
+            "sol_balance": 0,
+            "token_balance": 0
+        },
+        "test": {
+            "sol_balance": 0,
+            "token_balance": 0
+        },
+        "hjjk": {
+            "sol_balance": 0,
+            "token_balance": 0
+        }
+    }
+}
