@@ -1,0 +1,25 @@
+{
+  "name": "solana-wallet-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot-logic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/projectsniper82/projectsniper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/projectsniper82/projectsniper/issues"
+  },
+  "homepage": "https://github.com/projectsniper82/projectsniper#readme",
+  "dependencies": {
+    "@project-serum/serum": "^0.13.65",
+    "@solana/spl-token": "^0.4.13",
+    "@solana/web3.js": "^1.98.0"
+  }
+}

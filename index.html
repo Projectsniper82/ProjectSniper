@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Trading Bot Dashboard</title>
+    <!-- Include Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Solana Web3.js -->
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <!-- Include Chart.js for statistics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Additional custom styles */
+        .wallet-card {
+            transition: all 0.3s ease;
+        }
+        .wallet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #68D391;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #68D391;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <header class="bg-white shadow rounded-lg mb-6 p-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <img src="https://solana.com/src/img/branding/solanaLogoMark.svg" alt="Solana Logo" class="h-10 w-10
+
+
+mr-2">
+                    <h1 class="text-xl font-bold text-gray-800">Solana Trading Bot Dashboard</h1>
+                </div>
+                
+                <!-- Network Switch -->
+                <div class="flex items-center">
+                    <span class="mr-2 text-sm font-medium text-gray-700">Network:</span>
+                    <div class="relative inline-block w-32">
+                        <select id="network-select" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="devnet">Devnet</option>
+                            <option value="mainnet">Mainnet</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Network Status -->
+                <div class="flex items-center ml-4">
+                    <div id="network-status" class="flex items-center">
+                        <span class="h-3 w-3 rounded-full bg-green-500 mr-2"></span>
+                        <span class="text-sm font-medium">Connected</span>
+                    </div>
+                    <div id="network-latency" class="ml-4 text-sm text-gray-600">
+                        Latency: <span>45ms</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Token Address Input -->
+            <div class="mt-4">
+                <div class="flex flex-col md:flex-row items-start md:items-center">
+                    <div class="w-full md:w-2/3">
+                        <label for="token-address" class="block text-sm font-medium text-gray-700">Token Address</label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <input type="text" id="token-address" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 p-2 border" placeholder="Enter token address">
+                        </div>
+                    </div>
+                    <button id="set-token-btn" class="mt-3 md:mt-0 md:ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Set Token
+                    </button>
+                    <button id="create-wallet-btn" class="mt-3 md:mt-0 md:ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        Create New Wallet
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="flex flex-col lg:flex-row">
+            <!-- Wallet Section -->
+            <div class="w-full lg:w-2/3 pr-0 lg:pr-4 mb-6 lg:mb-0">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Wallets & Bots</h2>
+                <div id="wallets-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Wallet cards will be generated here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Trade History Section -->
+            <div class="w-full lg:w-1/3">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Trade History</h2>
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <div class="px-4 py-3 border-b border-gray-200">
+                        <h3 class="text-sm font-medium text-gray-700">Recent Transactions</h3>
+                    </div>
+                    <div class="max-h-96 overflow-y-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50 sticky top-0">
+                                <tr>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bot</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="trade-history-body" class="bg-white divide-y divide-gray-200">
+                                <!-- Trade history will be generated here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Create Wallet -->
+    <div id="create-wallet-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Create New Wallet</h3>
+                <div class="mt-2 px-7 py-3">
+                    <div class="mb-4">
+                        <label for="bot-type" class="block text-sm font-medium text-gray-700 text-left">Bot Type</label>
+                        <select id="bot-type" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="sniper">Sniper Bot</option>
+                            <option value="volume_1">Volume Bot 1</option>
+                            <option value="volume_2">Volume Bot 2</option>
+                            <option value="volume_3">Volume Bot 3</option>
+                            <option value="volume_4">Volume Bot 4</option>
+                            <option value="volume_5">Volume Bot 5</option>
+                            <option value="volume_6">Volume Bot 6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="create-wallet-confirm" class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300">
+                        Create
+                    </button>
+                    <button id="create-wallet-cancel" class="mt-3 px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Transfer Tokens/SOL -->
+    <div id="transfer-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <h3 id="transfer-modal-title" class="text-lg leading-6 font-medium text-gray-900">Transfer SOL</h3>
+                <div class="mt-2 px-7 py-3">
+                    <div class="mb-4">
+                        <label for="recipient-address" class="block text-sm font-medium text-gray-700 text-left">Recipient Address</label>
+                        <input type="text" id="recipient-address" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter recipient address">
+                    </div>
+                    <div class="mb-4">
+                        <label for="transfer-amount" class="block text-sm font-medium text-gray-700 text-left">Amount</label>
+                        <input type="number" id="transfer-amount" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="0.0" step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="transfer-confirm" class="px-4 py-2 bg-indigo-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                        Send
+                    </button>
+                    <button id="transfer-cancel" class="mt-3 px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Modal for Bot Settings -->
+    <div id="bot-settings-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <h3 id="bot-settings-title" class="text-lg leading-6 font-medium text-gray-900 text-center">Bot Settings</h3>
+                <div class="mt-2 px-7 py-3">
+                    <div class="mb-4">
+                        <label for="settings-slippage" class="block text-sm font-medium text-gray-700 text-left">Slippage (%)</label>
+                        <input type="number" id="settings-slippage" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="0.5" step="0.1" min="0" max="100">
+                    </div>
+                    <div class="mb-4">
+                        <label for="settings-max-buy" class="block text-sm font-medium text-gray-700 text-left">Max Buy Amount (SOL)</label>
+                        <input type="number" id="settings-max-buy" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="1.0" step="0.01" min="0">
+                    </div>
+                    <div class="mb-4">
+                        <label for="settings-min-sell" class="block text-sm font-medium text-gray-700 text-left">Min Sell Price (relative to buy price)</label>
+                        <input type="number" id="settings-min-sell" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="1.2" step="0.01" min="0">
+                    </div>
+                    <div class="mb-4">
+                        <label for="settings-buy-interval" class="block text-sm font-medium text-gray-700 text-left">Buy Interval (seconds)</label>
+                        <input type="number" id="settings-buy-interval" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="60" step="1" min="1">
+                    </div>
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="settings-save" class="px-4 py-2 bg-indigo-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                        Save Settings
+                    </button>
+                    <button id="settings-cancel" class="mt-3 px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wallet Card Template - Will be cloned by JavaScript -->
+    <template id="wallet-card-template">
+        <div class="wallet-card bg-white shadow rounded-lg overflow-hidden">
+            <div class="px-4 py-5 sm:p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900 bot-name">Sniper Bot</h3>
+                    
+                    <!-- Bot toggle switch -->
+                    <div class="flex items-center">
+                        <span class="mr-3 text-sm font-medium text-gray-700">Off</span>
+                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                            <input type="checkbox" name="bot-toggle" id="bot-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer">
+                            <label for="bot-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">On</span>
+                    </div>
+                </div>
+                
+                <!-- Wallet info -->
+                <div class="mb-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-gray-500">Wallet Address</span>
+                        <div class="flex items-center">
+                            <span class="wallet-address text-xs text-gray-500 mr-2">0x1234...5678</span>
+                            <button class="copy-address p-1 text-gray-400 hover:text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Balance info -->
+                <div class="mb-4">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-500">SOL Balance</span>
+                        <span class="sol-balance text-sm font-medium text-gray-900">1.234 SOL</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm font-medium text-gray-500">Token Balance</span>
+                        <span class="token-balance text-sm font-medium text-gray-900">0 Tokens</span>
+                    </div>
+                </div>
+                
+                <!-- Action buttons -->
+                <div class="grid grid-cols-2 gap-2">
+                    <button class="airdrop-btn inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        Airdrop
+                    </button>
+                    <button class="settings-btn inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        Settings
+                    </button>
+                    <button class="send-sol-btn inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Send SOL
+                    </button>
+                    <button class="send-token-btn inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                        Send Token
+                    </button>
+                </div>
+                
+                <!-- Manual trading section - hidden by default when auto trading is on -->
+                <div class="manual-trading mt-4 pt-4 border-t border-gray-200 hidden">
+                    <h4 class="text-sm font-medium text-gray-900 mb-2">Manual Trading</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label for="buy-amount" class="block text-xs font-medium text-gray-500">Buy Amount (SOL)</label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="number" class="buy-amount focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 p-1 border" placeholder="0.1" step="0.01" min="0">
+                            </div>
+                        </div>
+                        <div class="flex items-end">
+                            <button class="manual-buy-btn w-full inline-flex justify-center items-center px-3 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                Buy
+                            </button>
+                        </div>
+                        <div>
+                            <label for="sell-amount" class="block text-xs font-medium text-gray-500">Sell Amount (Tokens)</label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="number" class="sell-amount focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 p-1 border" placeholder="100" step="1" min="0">
+                            </div>
+                        </div>
+                        <div class="flex items-end">
+                            <button class="manual-sell-btn w-full inline-flex justify-center items-center px-3 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                Sell
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Main JavaScript - Initialize and Control Dashboard -->
+    <script src="dashboard-ui.js"></script>
+</body>
+</html>
+

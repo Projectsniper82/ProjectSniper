@@ -1,0 +1,22 @@
+[
+  {
+    "type": "BUY",
+    "timestamp": 1711287654321,
+    "amount": 0.1,
+    "tokenAmount": 100000,
+    "wallet": "ExampleWalletAddress1",
+    "botType": "sniper",
+    "status": "completed",
+    "txId": "sim_1711287654321_123456"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1711287754321,
+    "amount": 0.05,
+    "tokenAmount": 50000,
+    "wallet": "ExampleWalletAddress2",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1711287754321_654321"
+  }
+]
