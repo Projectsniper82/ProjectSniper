@@ -322,53 +322,17 @@
     }
 
     .tab-nav {
-      display: flex;
-      border-bottom: 1px solid var(--border-color);
-      margin-bottom: 20px;
-    }
-
-    .tab-link {
-      padding: 10px 20px;
-      cursor: pointer;
-      color: #888;
-      border-bottom: 2px solid transparent;
-    }
-
-    .tab-link.active {
-      color: var(--text-color);
-      border-bottom: 2px solid var(--primary-color);
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    .trading-bot-card {
-      background-color: rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-    }
-
-    .trading-bot-status {
-      display: flex;
-      align-items: center;
-    }
-
-    .status-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: 5px;
-    }
-
-    .status-active {
-      background-color: var(--secondary-color);
-    }
+      <div class="card">
+        {% for wallet in wallets %}
+        <div class="wallet-item {% if wallet.is_active %}active{% endif %}" data-wallet-id="{{ wallet.id }}" onclick="selectWallet(this)">
+          <div class="wallet-details">
+            <div class="wallet-name">{{ wallet.name }}</div>
+            <div class="wallet-address">{{ wallet.pubkey[:8] }}...{{ wallet.pubkey[-8:] }}</div>
+          </div>
+          <div class="wallet-balance">{{ wallet.sol_balance }} SOL</div>
+        </div>
+        {% endfor %}
+      </div>
 
     .status-inactive {
       background-color: #ff5555;
@@ -617,19 +581,104 @@
               <div class="form-group">
                 <label class="form-label">Token Address</label>
                 <input
-                  type="text"
-                  class="form-control"
-                  id="buyTokenAddress"
-                  placeholder="Enter token address"
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Amount (SOL)</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="buyAmount"
-                  value="0.1"
+  function toggleBot(enabled) {
+    const activeWalletId = document.querySelector(".wallet-item.active").getAttribute("data-wallet-id");
+    const endpoint = enabled 
+      ? `/api/trading/${activeWalletId}/enable` 
+      : `/api/trading/${activeWalletId}/disable`;
+      
+    fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        const statusIndicator = document.querySelector(".trading-bot-status .status-indicator");
+        const statusText = statusIndicator.nextElementSibling;
+        if (enabled) {
+          statusIndicator.classList.remove("status-inactive");
+          statusIndicator.classList.add("status-active");
+          statusText.textContent = "Active";
+        } else {
+  function executeBuy() {
+    const activeWalletId = document.querySelector(".wallet-item.active").getAttribute("data-wallet-id");
+    const tokenAddress = document.getElementById("buyTokenAddress").value;
+    const amount = document.getElementById("buyAmount").value;
+    
+    if (!tokenAddress) {
+    // Select wallet
+    function selectWallet(element) {
+      document.querySelectorAll(".wallet-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      element.classList.add("active");
+      
+      // Update wallet details section
+      const walletId = element.getAttribute("data-wallet-id");
+      fetch(`/api/wallets/${walletId}/set-active`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          location.reload(); // Reload to update all wallet-related info
+        } else {
+          showNotification(`Error: ${data.error || "Unknown error"}`, "error");
+        }
+      })
+      .catch(error => {
+        showNotification(`Network error: ${error.message}`, "error");
+      });
+    }
+      showNotification("Please enter a token address", "error");
+      return;
+    }
+    if (!amount || isNaN(amount) || amount <= 0) {
+      showNotification("Please enter a valid amount", "error");
+      return;
+    }
+    
+    fetch(`/api/trading/${activeWalletId}/buy`, {
+  function executeSell() {
+    const activeWalletId = document.querySelector(".wallet-item.active").getAttribute("data-wallet-id");
+    const token = document.getElementById("sellTokenSelect").value;
+    const amount = document.getElementById("sellAmount").value;
+    
+    if (!token) {
+      showNotification("Please select a token", "error");
+      return;
+    }
+    if (!amount || isNaN(amount) || amount <= 0 || amount > 100) {
+      showNotification("Please enter a valid amount percentage", "error");
+      return;
+    }
+    
+    fetch(`/api/trading/${activeWalletId}/sell`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount_tokens: parseFloat(amount), token_address: token })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        showNotification(data.message, "success");
+      } else {
+        showNotification(`Error: ${data.message || "Unknown error"}`, "error");
+      }
+    })
+    .catch(error => {
+      showNotification(`Network error: ${error.message}`, "error");
+    });
+  }
+    })
+    .catch(error => {
+      showNotification(`Network error: ${error.message}`, "error");
+    });
+  }
+    });
+  }
                   min="0.01"
                   step="0.01"
                 />

@@ -214,6 +214,15 @@ def add_watch_wallet():
         return jsonify({"success": False, "error": str(e)}), 400
 
 @app.route('/api/wallets/active', methods=['POST'])
+@app.route("/api/wallets/<wallet_id>/set-active", methods=["POST"])
+def set_wallet_active(wallet_id):
+    """API endpoint to set a wallet as active and return to index."""
+    if wallet_manager.set_active_wallet(wallet_id):
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success": False, "error": "Invalid wallet ID"}), 400
+
+
 def set_active_wallet():
     """API endpoint to set the active wallet."""
     data = request.json
