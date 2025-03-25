@@ -1,7 +1,6 @@
 {
   "name": "solana-wallet-dashboard",
   "version": "1.0.0",
-  "description": "",
   "main": "bot-logic.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,8 +17,16 @@
   },
   "homepage": "https://github.com/projectsniper82/projectsniper#readme",
   "dependencies": {
+    "@jup-ag/core": "^4.0.0-beta.21",
     "@project-serum/serum": "^0.13.65",
     "@solana/spl-token": "^0.4.13",
-    "@solana/web3.js": "^1.98.0"
-  }
+    "@solana/web3.js": "^1.98.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9",
+    "rpc-websockets": "^7.5.1",
+    "ws": "^8.18.1"
+  },
+  "description": ""
 }

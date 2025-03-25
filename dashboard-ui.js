@@ -1,442 +1,225 @@
-// dashboard-ui.js - Frontend JavaScript for Wallet Dashboard
+// dashboard-ui.js - Frontend JavaScript for Wallet Dashboard with real-time updates
 
-// Mock implementation for demonstration - would be replaced with real backend communication
+// Real API implementation that connects to the backend
 class DashboardAPI {
     constructor() {
-        // For demo purposes we'll use localStorage to persist some state
-        this.initLocalStorage();
+        console.log('Initializing dashboard API with real backend connection...');
         
-        // Mock connection to backend
-        console.log('Initializing dashboard API...');
-        
-        // Initial network is devnet
+        // Default network is devnet
         this.network = localStorage.getItem('network') || 'devnet';
         
-        // Mock token address if previously set
+        // Store token address if previously set
         this.tokenAddress = localStorage.getItem('tokenAddress') || '';
         
-        // Create initial wallets if not exists
-        if (!localStorage.getItem('walletsInitialized')) {
-            this.createInitialWallets();
-            localStorage.setItem('walletsInitialized', 'true');
-        }
+        // Base URL for API calls
+        this.apiBaseUrl = 'http://localhost:3000/api';
+        
+        // Setup WebSocket connection for real-time updates
+        this.setupWebSocket();
+        
+        // Event listeners for updates
+        this.eventListeners = {
+            'trade': [],
+            'balance': [],
+            'network': []
+        };
     }
     
-    initLocalStorage() {
-        // Initialize local storage with demo data if not exists
-        if (!localStorage.getItem('tradeHistory')) {
-            const initialTrades = [
-                {
-                    type: 'BUY',
-                    timestamp: Date.now() - 3600000,
-                    amount: 0.1,
-                    tokenAmount: 100000,
-                    wallet: this.truncateAddress(this.generateRandomAddress()),
-                    botType: 'sniper',
-                    status: 'completed',
-                    txId: `sim_${Date.now() - 3600000}_123456`
-                },
-                {
-                    type: 'SELL',
-                    timestamp: Date.now() - 1800000,
-                    amount: 0.05,
-                    tokenAmount: 50000,
-                    wallet: this.truncateAddress(this.generateRandomAddress()),
-                    botType: 'volume_1',
-                    status: 'completed',
-                    txId: `sim_${Date.now() - 1800000}_654321`
+    setupWebSocket() {
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const wsUrl = `${protocol}//${window.location.host}/ws`;
+        
+        this.socket = new WebSocket(wsUrl);
+        
+        this.socket.onopen = () => {
+            console.log('WebSocket connection established');
+        };
+        
+        this.socket.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                
+                // Trigger appropriate event listeners
+                if (data.type && this.eventListeners[data.type]) {
+                    this.eventListeners[data.type].forEach(callback => callback(data.data));
                 }
-            ];
-            localStorage.setItem('tradeHistory', JSON.stringify(initialTrades));
-        }
-    }
-    
-    async createInitialWallets() {
-        const botTypes = [
-            'sniper',
-            'volume_1',
-            'volume_2',
-            'volume_3',
-            'volume_4',
-            'volume_5',
-            'volume_6'
-        ];
-        
-        const wallets = botTypes.map(botType => ({
-            publicKey: this.generateRandomAddress(),
-            botType,
-            isActive: false,
-            solBalance: botType === 'sniper' ? 2.5 : 1.0 + Math.random(),
-            tokenBalance: botType === 'sniper' ? 250000 : Math.floor(Math.random() * 100000),
-            config: {
-                slippage: 0.5,
-                maxBuyAmount: 1.0,
-                minSellPrice: 1.2,
-                buyInterval: 60
+            } catch (error) {
+                console.error('Error processing WebSocket message:', error);
             }
-        }));
+        };
         
-        localStorage.setItem('wallets', JSON.stringify(wallets));
+        this.socket.onclose = () => {
+            console.log('WebSocket connection closed. Reconnecting in 3 seconds...');
+            setTimeout(() => this.setupWebSocket(), 3000);
+        };
         
-        return wallets;
+        this.socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
     }
     
-    generateRandomAddress() {
-        let result = ''; 
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; 
-        for (let i = 0; i < 44; i++) { 
-            result += characters.charAt(Math.floor(Math.random() * characters.length)); 
+    // Event listener registration
+    on(event, callback) {
+        if (this.eventListeners[event]) {
+            this.eventListeners[event].push(callback);
         }
-        return result;
     }
     
-    truncateAddress(address) {
-        if (!address) return '';
-        return `${address.substring(0, 4)}...${address.substring(address.length - 4)}`;
+    // Remove event listener
+    off(event, callback) {
+        if (this.eventListeners[event]) {
+            this.eventListeners[event] = this.eventListeners[event].filter(cb => cb !== callback);
+        }
+    }
+    
+    async apiRequest(endpoint, method = 'GET', data = null) {
+        try {
+            const url = `${this.apiBaseUrl}/${endpoint}`;
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            
+            if (data && (method === 'POST' || method === 'PUT')) {
+                options.body = JSON.stringify(data);
+            }
+            
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`API request failed: ${errorText}`);
+            }
+            
+            return await response.json();
+        } catch (error) {
+            console.error('API request error:', error);
+            throw error;
+        }
     }
     
     async getWalletBalances() {
-        // Mock implementation - would call backend API in real implementation
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        return wallets;
+        try {
+            return await this.apiRequest('wallets');
+        } catch (error) {
+            console.error('Error fetching wallet balances:', error);
+            return [];
+        }
     }
     
     async getTradeHistory() {
-        // Mock implementation - would call backend API in real implementation
-        const trades = JSON.parse(localStorage.getItem('tradeHistory') || '[]');
-        return trades.sort((a, b) => b.timestamp - a.timestamp);
+        try {
+            return await this.apiRequest('trades');
+        } catch (error) {
+            console.error('Error fetching trade history:', error);
+            return [];
+        }
     }
     
     async switchNetwork(network) {
-        // Mock implementation
-        console.log(`Switching network to ${network}`);
-        this.network = network;
-        localStorage.setItem('network', network);
-        
-        // Simulate network status check with random latency
-        const latency = Math.floor(Math.random() * 100) + 20;
-        
-        return {
-            network,
-            status: 'connected',
-            latency
-        };
+        try {
+            const result = await this.apiRequest('network', 'POST', { network });
+            this.network = network;
+            localStorage.setItem('network', network);
+            return result;
+        } catch (error) {
+            console.error('Error switching network:', error);
+            throw error;
+        }
     }
     
     async setTokenAddress(address) {
-        // Mock implementation
-        console.log(`Setting token address to ${address}`);
-        this.tokenAddress = address;
-        localStorage.setItem('tokenAddress', address);
-        
-        return {
-            success: true,
-            tokenAddress: address
-        };
+        try {
+            const result = await this.apiRequest('token', 'POST', { address });
+            this.tokenAddress = address;
+            localStorage.setItem('tokenAddress', address);
+            return result;
+        } catch (error) {
+            console.error('Error setting token address:', error);
+            throw error;
+        }
     }
     
     async toggleBot(botIndex, active) {
-        // Mock implementation
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        
-        if (botIndex >= 0 && botIndex < wallets.length) {
-            wallets[botIndex].isActive = active;
-            localStorage.setItem('wallets', JSON.stringify(wallets));
-            
-            // Show manual trading section if bot is deactivated
-            return {
-                success: true,
-                botIndex,
-                active
-            };
+        try {
+            return await this.apiRequest('bot/toggle', 'POST', { botIndex, active });
+        } catch (error) {
+            console.error('Error toggling bot:', error);
+            throw error;
         }
-        
-        return {
-            success: false,
-            error: 'Invalid bot index'
-        };
     }
     
     async airDrop(botIndex, amount = 1) {
-        // Mock implementation - only works on devnet
-        if (this.network !== 'devnet') {
-            return {
-                success: false,
-                error: 'Airdrop only available on devnet'
-            };
+        try {
+            return await this.apiRequest('airdrop', 'POST', { botIndex, amount });
+        } catch (error) {
+            console.error('Error requesting airdrop:', error);
+            throw error;
         }
-        
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        
-        if (botIndex >= 0 && botIndex < wallets.length) {
-            wallets[botIndex].solBalance += amount;
-            localStorage.setItem('wallets', JSON.stringify(wallets));
-            
-            // Add transaction to history
-            this.addTransaction({
-                type: 'AIRDROP',
-                timestamp: Date.now(),
-                amount,
-                wallet: wallets[botIndex].publicKey,
-                botType: wallets[botIndex].botType,
-                status: 'completed',
-                txId: `airdrop_${Date.now()}_${Math.floor(Math.random() * 1000000)}`
-            });
-            
-            return {
-                success: true,
-                amount,
-                signature: `airdrop_${Date.now()}`
-            };
-        }
-        
-        return {
-            success: false,
-            error: 'Invalid bot index'
-        };
     }
     
     async sendSol(fromBotIndex, toAddress, amount) {
-        // Mock implementation
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        
-        if (fromBotIndex >= 0 && fromBotIndex < wallets.length) {
-            if (wallets[fromBotIndex].solBalance < amount) {
-                return {
-                    success: false,
-                    error: 'Insufficient balance'
-                };
-            }
-            
-            wallets[fromBotIndex].solBalance -= amount;
-            localStorage.setItem('wallets', JSON.stringify(wallets));
-            
-            // Add transaction to
-history
-            this.addTransaction({
-                type: 'SEND',
-                timestamp: Date.now(),
-                amount,
-                recipient: toAddress,
-                wallet: wallets[fromBotIndex].publicKey,
-                botType: wallets[fromBotIndex].botType,
-                status: 'completed',
-                txId: `send_${Date.now()}_${Math.floor(Math.random() * 1000000)}`
-            });
-            
-            return {
-                success: true,
-                amount,
-                signature: `send_${Date.now()}`
-            };
+        try {
+            return await this.apiRequest('send/sol', 'POST', { fromBotIndex, toAddress, amount });
+        } catch (error) {
+            console.error('Error sending SOL:', error);
+            throw error;
         }
-        
-        return {
-            success: false,
-            error: 'Invalid bot index'
-        };
     }
     
     async sendTokens(fromBotIndex, toAddress, amount) {
-        // Mock implementation
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        
-        if (fromBotIndex >= 0 && fromBotIndex < wallets.length) {
-            if (wallets[fromBotIndex].tokenBalance < amount) {
-                return {
-                    success: false,
-                    error: 'Insufficient token balance'
-                };
-            }
-            
-            wallets[fromBotIndex].tokenBalance -= amount;
-            localStorage.setItem('wallets', JSON.stringify(wallets));
-            
-            // Add transaction to history
-            this.addTransaction({
-                type: 'SEND_TOKEN',
-                timestamp: Date.now(),
-                tokenAmount: amount,
-                recipient: toAddress,
-                wallet: wallets[fromBotIndex].publicKey,
-                botType: wallets[fromBotIndex].botType,
-                status: 'completed',
-                txId: `send_token_${Date.now()}_${Math.floor(Math.random() * 1000000)}`
-            });
-            
-            return {
-                success: true,
-                amount,
-                signature: `send_token_${Date.now()}`
-            };
+        try {
+            return await this.apiRequest('send/token', 'POST', { fromBotIndex, toAddress, amount });
+        } catch (error) {
+            console.error('Error sending tokens:', error);
+            throw error;
         }
-        
-        return {
-            success: false,
-            error: 'Invalid bot index'
-        };
     }
     
     async manualBuy(botIndex, amount) {
-        // Mock implementation
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        
-        if (botIndex >= 0 && botIndex < wallets.length) {
-            if (wallets[botIndex].isActive) {
-                return {
-                    success: false,
-                    error: 'Deactivate automatic trading before manual trading'
-                };
-            }
-            
-            if (wallets[botIndex].solBalance < amount) {
-                return {
-                    success: false,
-                    error: 'Insufficient SOL balance'
-                };
-            }
-            
-            // Simulate token purchase
-            wallets[botIndex].solBalance -= amount;
-            const tokenAmount = amount * 1000000; // Mock exchange rate
-            wallets[botIndex].tokenBalance += tokenAmount;
-            
-            localStorage.setItem('wallets', JSON.stringify(wallets));
-            
-            // Add transaction to history
-            const trade = {
-                type: 'BUY',
-                timestamp: Date.now(),
-                amount,
-                tokenAmount,
-                wallet: wallets[botIndex].publicKey,
-                botType: wallets[botIndex].botType,
-                status: 'completed',
-                txId: `manual_buy_${Date.now()}_${Math.floor(Math.random() * 1000000)}`
-            };
-            
-            this.addTransaction(trade);
-            
-            return {
-                success: true,
-                ...trade
-            };
+        try {
+            return await this.apiRequest('trade/buy', 'POST', { botIndex, amount });
+        } catch (error) {
+            console.error('Error executing buy:', error);
+            throw error;
         }
-        
-        return {
-            success: false,
-            error: 'Invalid bot index'
-        };
     }
     
-    async manualSell(botIndex, tokenAmount) {
-        // Mock implementation
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        
-        if (botIndex >= 0 && botIndex < wallets.length) {
-            if (wallets[botIndex].isActive) {
-                return {
-                    success: false,
-                    error: 'Deactivate automatic trading before manual trading'
-                };
-            }
-            
-            if (wallets[botIndex].tokenBalance < tokenAmount) {
-                return {
-                    success: false,
-                    error: 'Insufficient token balance'
-                };
-            }
-            
-            // Simulate token sale
-            wallets[botIndex].tokenBalance -= tokenAmount;
-            const amount = tokenAmount / 1000000; // Mock exchange rate
-            wallets[botIndex].solBalance += amount;
-            
-            localStorage.setItem('wallets', JSON.stringify(wallets));
-            
-            // Add transaction to history
-            const trade = {
-                type: 'SELL',
-                timestamp: Date.now(),
-                amount,
-                tokenAmount,
-                wallet: wallets[botIndex].publicKey,
-                botType: wallets[botIndex].botType,
-                status: 'completed',
-                txId: `manual_sell_${Date.now()}_${Math.floor(Math.random() * 1000000)}`
-            };
-            
-            this.addTransaction(trade);
-            
-            return {
-                success: true,
-                ...trade
-            };
+    async manualSell(botIndex, amount) {
+        try {
+            return await this.apiRequest('trade/sell', 'POST', { botIndex, amount });
+        } catch (error) {
+            console.error('Error executing sell:', error);
+            throw error;
         }
-        
-        return {
-            success: false,
-            error: 'Invalid bot index'
-        };
     }
     
     async createNewWallet(botType) {
-        // Mock implementation
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        
-        const newWallet = {
-            publicKey: this.generateRandomAddress(),
-            botType,
-            isActive: false,
-            solBalance: 0,
-            tokenBalance: 0,
-            config: {
-                slippage: 0.5,
-                maxBuyAmount: 1.0,
-                minSellPrice: 1.2,
-                buyInterval: 60
-            }
-        };
-        
-        wallets.push(newWallet);
-        localStorage.setItem('wallets', JSON.stringify(wallets));
-        
-        return {
-            success: true,
-            wallet: newWallet
-        };
+        try {
+            return await this.apiRequest('wallet/create', 'POST', { botType });
+        } catch (error) {
+            console.error('Error creating wallet:', error);
+            throw error;
+        }
     }
     
     async updateBotConfig(botIndex, config) {
-        // Mock implementation
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        
-        if (botIndex >= 0 && botIndex < wallets.length) {
-            wallets[botIndex].config = {
-                ...wallets[botIndex].config,
-                ...config
-            };
-            
-            localStorage.setItem('wallets', JSON.stringify(wallets));
-            
-            return {
-                success: true,
-                botIndex,
-                config: wallets[botIndex].config
-            };
+        try {
+            return await this.apiRequest('bot/config', 'POST', { botIndex, config });
+        } catch (error) {
+            console.error('Error updating bot config:', error);
+            throw error;
         }
-        
-        return {
-            success: false,
-            error: 'Invalid bot index'
-        };
     }
     
-    addTransaction(transaction) {
-        const trades = JSON.parse(localStorage.getItem('tradeHistory') || '[]');
-        trades.unshift(transaction);
-        localStorage.setItem('tradeHistory', JSON.stringify(trades.slice(0, 100))); // Keep only latest 100 transactions
+    async getNetworkStatus() {
+        try {
+            return await this.apiRequest('network/status');
+        } catch (error) {
+            console.error('Error getting network status:', error);
+            return { status: 'error', latency: 999 };
+        }
     }
 }
 
@@ -450,10 +233,33 @@ class DashboardUI {
         this.currentAction = '';
         
         this.initEventListeners();
+        this.setupRealTimeUpdates();
         this.refreshDashboard();
         
-        // Refresh dashboard every 30 seconds
-        setInterval(() => this.refreshDashboard(), 30000);
+        // Secondary periodic refresh as a fallback (every 10 seconds instead of 30)
+        setInterval(() => this.refreshDashboard(), 10000);
+    }
+    
+    setupRealTimeUpdates() {
+        // Listen for trade updates
+        this.api.on('trade', (tradeData) => {
+            console.log('Received trade update:', tradeData);
+            this.updateTradeHistory();
+            // Also update wallet balances as they will have changed
+            this.updateWalletCards();
+        });
+        
+        // Listen for balance updates
+        this.api.on('balance', (balanceData) => {
+            console.log('Received balance update:', balanceData);
+            this.updateWalletCards();
+        });
+        
+        // Listen for network updates
+        this.api.on('network', (networkData) => {
+            console.log('Received network update:', networkData);
+            this.updateNetworkStatus();
+        });
     }
     
     async initEventListeners() {
@@ -526,10 +332,11 @@ class DashboardUI {
             this.hideBotSettingsModal();
         });
     }
-async refreshDashboard() {
+    
+    async refreshDashboard() {
         await this.updateWalletCards();
         await this.updateTradeHistory();
-        this.updateNetworkStatus();
+        await this.updateNetworkStatus();
         this.updateTokenAddressDisplay();
     }
     
@@ -537,12 +344,46 @@ async refreshDashboard() {
         const wallets = await this.api.getWalletBalances();
         const container = document.getElementById('wallets-container');
         
+        // Store current state of cards to preserve toggle states
+        const currentCards = {};
+        Array.from(container.children).forEach(card => {
+            const index = card.dataset.index;
+            if (index) {
+                currentCards[index] = {
+                    checked: card.querySelector('.toggle-checkbox').checked,
+                    buyAmount: card.querySelector('.buy-amount')?.value,
+                    sellAmount: card.querySelector('.sell-amount')?.value
+                };
+            }
+        });
+        
         // Clear existing wallet cards
         container.innerHTML = '';
         
         // Create wallet cards
         wallets.forEach((wallet, index) => {
             const card = this.createWalletCard(wallet, index);
+            
+            // Restore previous state if it exists
+            if (currentCards[index]) {
+                const toggle = card.querySelector('.toggle-checkbox');
+                toggle.checked = currentCards[index].checked;
+                
+                const buyInput = card.querySelector('.buy-amount');
+                if (buyInput && currentCards[index].buyAmount) {
+                    buyInput.value = currentCards[index].buyAmount;
+                }
+                
+                const sellInput = card.querySelector('.sell-amount');
+                if (sellInput && currentCards[index].sellAmount) {
+                    sellInput.value = currentCards[index].sellAmount;
+                }
+                
+                // Show/hide manual trading section based on toggle state
+                const manualTrading = card.querySelector('.manual-trading');
+                manualTrading.classList.toggle('hidden', toggle.checked);
+            }
+            
             container.appendChild(card);
         });
     }
@@ -564,8 +405,8 @@ async refreshDashboard() {
         addressElement.textContent = this.truncateAddress(wallet.publicKey);
         addressElement.title = wallet.publicKey;
         
-        card.querySelector('.sol-balance').textContent = `${wallet.solBalance.toFixed(4)} SOL`;
-        card.querySelector('.token-balance').textContent = `${wallet.tokenBalance.toLocaleString()} Tokens`;
+        card.querySelector('.sol-balance').textContent = `${wallet.sol.toFixed(4)} SOL`;
+        card.querySelector('.token-balance').textContent = `${wallet.token.toLocaleString()} Tokens`;
         
         // Set toggle state
         const toggle = card.querySelector('.toggle-checkbox');
@@ -684,22 +525,33 @@ async refreshDashboard() {
         });
     }
     
-    updateNetworkStatus() {
+    async updateNetworkStatus() {
         const statusIndicator = document.querySelector('#network-status span:first-child');
         const statusText = document.querySelector('#network-status span:last-child');
         const latencyElement = document.querySelector('#network-latency span');
         
-        if (this.api.network === 'devnet') {
-            statusIndicator.className = 'h-3 w-3 rounded-full bg-green-500 mr-2';
-            statusText.textContent = 'Devnet Connected';
-        } else {
-            statusIndicator.className = 'h-3 w-3 rounded-full bg-purple-500 mr-2';
-            statusText.textContent = 'Mainnet Connected';
+        try {
+            const networkStatus = await this.api.getNetworkStatus();
+            
+            if (this.api.network === 'devnet') {
+                statusIndicator.className = 'h-3 w-3 rounded-full bg-green-500 mr-2';
+                statusText.textContent = 'Devnet Connected';
+            } else {
+                statusIndicator.className = 'h-3 w-3 rounded-full bg-purple-500 mr-2';
+                statusText.textContent = 'Mainnet Connected';
+            }
+            
+            latencyElement.textContent = `${networkStatus.latency}ms`;
+            
+            if (networkStatus.status !== 'connected') {
+                statusIndicator.className = 'h-3 w-3 rounded-full bg-red-500 mr-2';
+                statusText.textContent = 'Connection Error';
+            }
+        } catch (error) {
+            statusIndicator.className = 'h-3 w-3 rounded-full bg-red-500 mr-2';
+            statusText.textContent = 'Connection Error';
+            latencyElement.textContent = 'N/A';
         }
-        
-        // Mock latency for demo
-        const latency = Math.floor(Math.random() * 100) + 20;
-        latencyElement.textContent = `${latency}ms`;
     }
     
     updateTokenAddressDisplay() {
@@ -709,104 +561,154 @@ async refreshDashboard() {
     
     // UI Action Methods
     async switchNetwork(network) {
-        const result = await this.api.switchNetwork(network);
-        
-        if (result.status === 'connected') {
-            this.updateNetworkStatus();
-            await this.refreshDashboard();
+        try {
+            const result = await this.api.switchNetwork(network);
             
-            this.showNotification(`Switched to ${network}`);
+            if (result.status === 'connected') {
+                this.updateNetworkStatus();
+                await this.refreshDashboard();
+                this.showNotification(`Switched to ${network}`);
+            } else {
+                this.showNotification(`Failed to connect to ${network}`, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Network switch failed: ${error.message}`, 'error');
         }
     }
     
     async setTokenAddress(address) {
-        const result = await this.api.setTokenAddress(address);
-        
-        if (result.success) {
-            this.updateTokenAddressDisplay();
-            this.showNotification('Token address set successfully');
+        try {
+            const result = await this.api.setTokenAddress(address);
+            
+            if (result.success) {
+                this.updateTokenAddressDisplay();
+                this.showNotification('Token address set successfully');
+                await this.refreshDashboard(); // Refresh to update token balances
+            } else {
+                this.showNotification(`Failed to set token address: ${result.error}`, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Error setting token address: ${error.message}`, 'error');
         }
     }
     
     async toggleBot(index, active) {
-        const result = await this.api.toggleBot(index, active);
-        
-        if (result.success) {
-            this.showNotification(`${active ? 'Activated' : 'Deactivated'} ${this.formatBotName(result.botType)}`);
-            await this.refreshDashboard();
+        try {
+            const result = await this.api.toggleBot(index, active);
+            
+            if (result.success) {
+                this.showNotification(`${active ? 'Activated' : 'Deactivated'} ${this.formatBotName(result.botType)}`);
+                await this.refreshDashboard();
+            } else {
+                this.showNotification(`Failed to ${active ? 'activate' : 'deactivate'} bot: ${result.error}`, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Error toggling bot: ${error.message}`, 'error');
         }
     }
     
     async airDrop(index) {
-        const result = await this.api.airDrop(index);
-        
-        if (result.success) {
-            this.showNotification(`Airdropped ${result.amount} SOL successfully`);
-            await this.refreshDashboard();
-        } else {
-            this.showNotification(result.error, 'error');
+        try {
+            const result = await this.api.airDrop(index);
+            
+            if (result.success) {
+                this.showNotification(`Airdropped ${result.amount} SOL successfully`);
+                await this.refreshDashboard();
+            } else {
+                this.showNotification(result.error, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Airdrop failed: ${error.message}`, 'error');
         }
     }
     
     async sendSol(fromIndex, toAddress, amount) {
-        const result = await this.api.sendSol(fromIndex, toAddress, amount);
-        
-        if (result.success) {
-            this.showNotification(`Sent ${amount} SOL successfully`);
-            await this.refreshDashboard();
-        } else {
-            this.showNotification(result.error, 'error');
+        try {
+            const result = await this.api.sendSol(fromIndex, toAddress, amount);
+            
+            if (result.success) {
+                this.showNotification(`Sent ${amount} SOL successfully`);
+                await this.refreshDashboard();
+            } else {
+                this.showNotification(result.error, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Send SOL failed: ${error.message}`, 'error');
         }
     }
     
     async sendTokens(fromIndex, toAddress, amount) {
-        const result = await this.api.sendTokens(fromIndex, toAddress, amount);
-        
-        if (result.success) {
-            this.showNotification(`Sent ${amount} tokens successfully`);
-            await this.refreshDashboard();
-        } else {
-            this.showNotification(result.error, 'error');
+        try {
+            const result = await this.api.sendTokens(fromIndex, toAddress, amount);
+            
+            if (result.success) {
+                this.showNotification(`Sent ${amount} tokens successfully`);
+                await this.refreshDashboard();
+            } else {
+                this.showNotification(result.error, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Send tokens failed: ${error.message}`, 'error');
         }
     }
     
     async manualBuy(index, amount) {
-        const result = await this.api.manualBuy(index, amount);
-        
-        if (result.success) {
-            this.showNotification(`Bought tokens for ${amount} SOL successfully`);
-            await this.refreshDashboard();
-        } else {
-            this.showNotification(result.error, 'error');
+        try {
+            const result = await this.api.manualBuy(index, amount);
+            
+            if (result.success) {
+                this.showNotification(`Bought tokens for ${amount} SOL successfully`);
+                await this.refreshDashboard();
+            } else {
+                this.showNotification(result.error, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Buy failed: ${error.message}`, 'error');
         }
     }
     
     async manualSell(index, amount) {
-        const result = await this.api.manualSell(index, amount);
-        
-        if (result.success) {
-            this.showNotification(`Sold ${amount} tokens successfully`);
-            await this.refreshDashboard();
-        } else {
-            this.showNotification(result.error, 'error');
+        try {
+            const result = await this.api.manualSell(index, amount);
+            
+            if (result.success) {
+                this.showNotification(`Sold ${amount} tokens successfully`);
+                await this.refreshDashboard();
+            } else {
+                this.showNotification(result.error, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Sell failed: ${error.message}`, 'error');
         }
     }
     
     async createNewWallet(botType) {
-        const result = await this.api.createNewWallet(botType);
-        
-        if (result.success) {
-            this.showNotification(`Created new ${this.formatBotName(botType)} wallet`);
-            await this.refreshDashboard();
+        try {
+            const result = await this.api.createNewWallet(botType);
+            
+            if (result.success) {
+                this.showNotification(`Created new ${this.formatBotName(botType)} wallet`);
+                await this.refreshDashboard();
+            } else {
+                this.showNotification(`Failed to create wallet: ${result.error}`, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Wallet creation failed: ${error.message}`, 'error');
         }
     }
     
     async updateBotConfig(index, config) {
-        const result = await this.api.updateBotConfig(index, config);
-        
-        if (result.success) {
-            this.showNotification('Bot settings updated');
-            await this.refreshDashboard();
+        try {
+            const result = await this.api.updateBotConfig(index, config);
+            
+            if (result.success) {
+                this.showNotification('Bot settings updated');
+                await this.refreshDashboard();
+            } else {
+                this.showNotification(`Failed to update settings: ${result.error}`, 'error');
+            }
+        } catch (error) {
+            this.showNotification(`Settings update failed: ${error.message}`, 'error');
         }
     }
     
@@ -847,20 +749,23 @@ async refreshDashboard() {
     showBotSettingsModal(botIndex) {
         this.selectedBotIndex = botIndex;
         
-        // Get current bot config
-        const wallets = JSON.parse(localStorage.getItem('wallets') || '[]');
-        const botConfig = wallets[botIndex].config;
-        
-        // Set form values
-        document.getElementById('settings-slippage').value = botConfig.slippage;
-        document.getElementById('settings-max-buy').value = botConfig.maxBuyAmount;
-        document.getElementById('settings-min-sell').value = botConfig.minSellPrice;
-        document.getElementById('settings-buy-interval').value = botConfig.buyInterval / 1000; // Convert to seconds
-        
-        // Update title
-        document.getElementById('bot-settings-title').textContent = `${this.formatBotName(wallets[botIndex].botType)} Settings`;
-        
-        document.getElementById('bot-settings-modal').classList.remove('hidden');
+        // Get wallet data
+        this.api.getWalletBalances().then(wallets => {
+            if (botIndex >= 0 && botIndex < wallets.length) {
+                const botConfig = wallets[botIndex].config || {};
+                
+                // Set form values with defaults if undefined
+                document.getElementById('settings-slippage').value = botConfig.slippage || 0.5;
+                document.getElementById('settings-max-buy').value = botConfig.maxBuyAmount || 1.0;
+                document.getElementById('settings-min-sell').value = botConfig.minSellPrice || 0;
+                document.getElementById('settings-buy-interval').value = (botConfig.buyInterval || 60000) / 1000; // Convert to seconds
+                
+                // Update title
+                document.getElementById('bot-settings-title').textContent = `${this.formatBotName(wallets[botIndex].botType)} Settings`;
+                
+                document.getElementById('bot-settings-modal').classList.remove('hidden');
+            }
+        });
     }
     
     hideBotSettingsModal() {

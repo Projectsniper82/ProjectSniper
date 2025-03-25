@@ -18,5 +18,985 @@
     "botType": "volume_1",
     "status": "completed",
     "txId": "sim_1711287754321_654321"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893595371,
+    "amount": 1,
+    "tokenAmount": 1000000,
+    "wallet": "7hVCgEq5BG6Pcfos8HHU3CyNkXtDXduqV7E4fEBgBx4R",
+    "botType": "sniper",
+    "status": "completed",
+    "txId": "sim_1742893595371_819696"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893659844,
+    "amount": 0.030986807642328425,
+    "tokenAmount": 30986.807642328426,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893659844_983373"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742893689844,
+    "amount": 0.03218082282942527,
+    "tokenAmount": 30986.807642328426,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893689845_239077"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893719845,
+    "amount": 0.04765330387616711,
+    "tokenAmount": 47653.30387616711,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893719845_951909"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893749846,
+    "amount": 0.019572657432699207,
+    "tokenAmount": 19572.657432699205,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893749846_549029"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893779847,
+    "amount": 0.049289662837855734,
+    "tokenAmount": 49289.662837855736,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893779847_929688"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893783578,
+    "amount": 0.05090053387605842,
+    "tokenAmount": 50900.53387605842,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742893783578_864043"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893809847,
+    "amount": 0.043757792588325725,
+    "tokenAmount": 43757.79258832573,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893809847_692853"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893839847,
+    "amount": 0.04914797261301417,
+    "tokenAmount": 49147.97261301417,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893839847_204126"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893843579,
+    "amount": 0.1251806981839954,
+    "tokenAmount": 125180.69818399541,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742893843580_887528"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893869848,
+    "amount": 0.010378644382998972,
+    "tokenAmount": 10378.644382998973,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893869848_399793"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742893899849,
+    "amount": 0.02378461379857092,
+    "tokenAmount": 24274.00619875704,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893899849_475418"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893903584,
+    "amount": 0.1076706725385944,
+    "tokenAmount": 107670.6725385944,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742893903584_404339"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893929849,
+    "amount": 0.014469510807799936,
+    "tokenAmount": 14469.510807799936,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893929849_60364"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893959849,
+    "amount": 0.03204731499050304,
+    "tokenAmount": 32047.31499050304,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893959849_477816"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893967695,
+    "amount": 0.17771470664685474,
+    "tokenAmount": 177714.70664685473,
+    "wallet": "3FBbY32Jc5GmETKM56hivJFxeQi3JTwZPAxbJNEr7q7o",
+    "botType": "volume_4",
+    "status": "completed",
+    "txId": "sim_1742893967695_368297"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742893989849,
+    "amount": 0.01394012298994466,
+    "tokenAmount": 13940.12298994466,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742893989849_673409"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894019849,
+    "amount": 0.0418571483751538,
+    "tokenAmount": 43002.61353653716,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894019849_460495"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894049849,
+    "amount": 0.05086446921398267,
+    "tokenAmount": 52709.33591343728,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894049850_169228"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894079850,
+    "amount": 0.019974743382683693,
+    "tokenAmount": 19974.743382683693,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894079850_542182"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894087699,
+    "amount": 0.15284161837455532,
+    "tokenAmount": 149860.82020660848,
+    "wallet": "3FBbY32Jc5GmETKM56hivJFxeQi3JTwZPAxbJNEr7q7o",
+    "botType": "volume_4",
+    "status": "completed",
+    "txId": "sim_1742894087699_22721"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894109850,
+    "amount": 0.05144585335524738,
+    "tokenAmount": 53227.66198287092,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894109850_92194"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894139851,
+    "amount": 0.046205484151112586,
+    "tokenAmount": 48019.39047383549,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894139851_142220"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894169852,
+    "amount": 0.04730757100537796,
+    "tokenAmount": 45721.47877739573,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894169852_391960"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894199853,
+    "amount": 0.049068934055277874,
+    "tokenAmount": 49068.934055277874,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894199853_705208"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894207707,
+    "amount": 0.11213393313785255,
+    "tokenAmount": 112133.93313785255,
+    "wallet": "3FBbY32Jc5GmETKM56hivJFxeQi3JTwZPAxbJNEr7q7o",
+    "botType": "volume_4",
+    "status": "completed",
+    "txId": "sim_1742894207707_639670"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894229854,
+    "amount": 0.039795827474168204,
+    "tokenAmount": 39795.8274741682,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894229854_701003"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894259855,
+    "amount": 0.015062229671276475,
+    "tokenAmount": 15062.229671276475,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894259855_84472"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894264394,
+    "amount": 0.10978676716704375,
+    "tokenAmount": 109786.76716704374,
+    "wallet": "GBGEw7dSRDgFf5NSZQ68QdLaCTbNMqPNu13irKAWPGpj",
+    "botType": "volume_3",
+    "status": "completed",
+    "txId": "sim_1742894264394_241258"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894289856,
+    "amount": 0.013476482913869705,
+    "tokenAmount": 13476.482913869706,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894289856_325615"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894319856,
+    "amount": 0.03661253980148245,
+    "tokenAmount": 36612.539801482446,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894319856_325086"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894327715,
+    "amount": 0.08407984222722203,
+    "tokenAmount": 84079.84222722203,
+    "wallet": "3FBbY32Jc5GmETKM56hivJFxeQi3JTwZPAxbJNEr7q7o",
+    "botType": "volume_4",
+    "status": "completed",
+    "txId": "sim_1742894327715_448777"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894349858,
+    "amount": 0.03093858495052521,
+    "tokenAmount": 31487.880467731462,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894349858_307818"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894379859,
+    "amount": 0.02844244757582355,
+    "tokenAmount": 28442.44757582355,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894379859_718071"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894409860,
+    "amount": 0.04957584854456908,
+    "tokenAmount": 52163.372746573565,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894409860_285955"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894439861,
+    "amount": 0.019072598215854723,
+    "tokenAmount": 19072.598215854723,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894439861_108890"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894444398,
+    "amount": 0.11086935566643641,
+    "tokenAmount": 110869.35566643642,
+    "wallet": "GBGEw7dSRDgFf5NSZQ68QdLaCTbNMqPNu13irKAWPGpj",
+    "botType": "volume_3",
+    "status": "completed",
+    "txId": "sim_1742894444398_483464"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894447719,
+    "amount": 0.09422962470815147,
+    "tokenAmount": 94229.62470815146,
+    "wallet": "3FBbY32Jc5GmETKM56hivJFxeQi3JTwZPAxbJNEr7q7o",
+    "botType": "volume_4",
+    "status": "completed",
+    "txId": "sim_1742894447719_268022"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894469862,
+    "amount": 0.037482424235616936,
+    "tokenAmount": 38884.12793359932,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894469862_383781"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894499863,
+    "amount": 0.0577883978517782,
+    "tokenAmount": 57094.327067398,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894499863_971840"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894529864,
+    "amount": 0.018408883418890947,
+    "tokenAmount": 19230.378018903688,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894529864_832176"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894559865,
+    "amount": 0.05363851008891191,
+    "tokenAmount": 53638.51008891191,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894559865_506595"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894567727,
+    "amount": 0.14190983615069525,
+    "tokenAmount": 141909.83615069525,
+    "wallet": "3FBbY32Jc5GmETKM56hivJFxeQi3JTwZPAxbJNEr7q7o",
+    "botType": "volume_4",
+    "status": "completed",
+    "txId": "sim_1742894567727_264106"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894589865,
+    "amount": 0.013780811397237682,
+    "tokenAmount": 13780.811397237683,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894589865_644194"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894619865,
+    "amount": 0.042897717563299805,
+    "tokenAmount": 42775.65689435175,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894619866_782506"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742894624399,
+    "amount": 0.1923796945377387,
+    "tokenAmount": 192379.69453773872,
+    "wallet": "GBGEw7dSRDgFf5NSZQ68QdLaCTbNMqPNu13irKAWPGpj",
+    "botType": "volume_3",
+    "status": "completed",
+    "txId": "sim_1742894624399_524126"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894649866,
+    "amount": 0.02215416172426895,
+    "tokenAmount": 21546.30573812459,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894649866_745618"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894679867,
+    "amount": 0.014328951174216382,
+    "tokenAmount": 14690.106572700744,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894679868_216812"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894687735,
+    "amount": 0.12301962713213019,
+    "tokenAmount": 118953.96285464465,
+    "wallet": "3FBbY32Jc5GmETKM56hivJFxeQi3JTwZPAxbJNEr7q7o",
+    "botType": "volume_4",
+    "status": "completed",
+    "txId": "sim_1742894687735_557885"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742894709869,
+    "amount": 0.024095723755829003,
+    "tokenAmount": 24355.464773678083,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742894709869_843685"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895058654,
+    "amount": 0.026285470717997486,
+    "tokenAmount": 26285.470717997487,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895058655_478377"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895088654,
+    "amount": 0.042863391557617855,
+    "tokenAmount": 42863.391557617855,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895088654_887260"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895118655,
+    "amount": 0.04061709248082306,
+    "tokenAmount": 40617.09248082306,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895118655_99191"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895148656,
+    "amount": 0.022614438393968116,
+    "tokenAmount": 21957.771385427714,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895148656_888503"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895164592,
+    "amount": 0.12585776260960524,
+    "tokenAmount": 125857.76260960524,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895164592_995853"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895178656,
+    "amount": 0.027099274385458262,
+    "tokenAmount": 27099.274385458262,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895178657_940581"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895208657,
+    "amount": 0.05823933186222618,
+    "tokenAmount": 58239.33186222618,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895208657_213702"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895224594,
+    "amount": 0.07430399167861752,
+    "tokenAmount": 74303.99167861752,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895224594_517780"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895238658,
+    "amount": 0.02996776419677412,
+    "tokenAmount": 29967.76419677412,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895238660_248442"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895268657,
+    "amount": 0.029695196506379112,
+    "tokenAmount": 29695.196506379114,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895268657_16009"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895284595,
+    "amount": 0.09168853195316107,
+    "tokenAmount": 91688.53195316107,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895284595_518901"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895298658,
+    "amount": 0.044158608470364624,
+    "tokenAmount": 45275.873329576796,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895298658_470913"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895328658,
+    "amount": 0.032909017211834105,
+    "tokenAmount": 32909.01721183411,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895328658_901844"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895344596,
+    "amount": 0.11932918782104306,
+    "tokenAmount": 119329.18782104306,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895344596_339994"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895358659,
+    "amount": 0.015400024867994095,
+    "tokenAmount": 14830.168545117907,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895358659_76022"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895388659,
+    "amount": 0.04366016963262014,
+    "tokenAmount": 43660.16963262014,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895388659_245124"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895404597,
+    "amount": 0.09675410898332526,
+    "tokenAmount": 96754.10898332526,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895404597_933445"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895406104,
+    "amount": 0.2502322652137563,
+    "tokenAmount": 250232.2652137563,
+    "wallet": "GBGEw7dSRDgFf5NSZQ68QdLaCTbNMqPNu13irKAWPGpj",
+    "botType": "volume_3",
+    "status": "completed",
+    "txId": "sim_1742895406104_825841"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895418660,
+    "amount": 0.04538354722109227,
+    "tokenAmount": 43850.71021404462,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895418660_538353"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895448661,
+    "amount": 0.02278926771685163,
+    "tokenAmount": 22789.267716851627,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895448661_183036"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895464598,
+    "amount": 0.05053129827183149,
+    "tokenAmount": 52505.133253973414,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895464598_26209"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895478661,
+    "amount": 0.04616226688771645,
+    "tokenAmount": 46162.26688771645,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895478661_950931"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895508661,
+    "amount": 0.017735161553152485,
+    "tokenAmount": 17747.398650805386,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895508662_633128"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895524599,
+    "amount": 0.09273972144604484,
+    "tokenAmount": 92739.72144604483,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895524599_595936"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895538661,
+    "amount": 0.03713370653516264,
+    "tokenAmount": 37133.70653516264,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895538661_891307"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895568662,
+    "amount": 0.01776663127246036,
+    "tokenAmount": 17641.954936700076,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895568662_83127"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895584600,
+    "amount": 0.1321375052017712,
+    "tokenAmount": 132137.5052017712,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895584600_800709"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895586105,
+    "amount": 0.1954112775649442,
+    "tokenAmount": 195411.2775649442,
+    "wallet": "GBGEw7dSRDgFf5NSZQ68QdLaCTbNMqPNu13irKAWPGpj",
+    "botType": "volume_3",
+    "status": "completed",
+    "txId": "sim_1742895586105_826407"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895598662,
+    "amount": 0.03517252912145764,
+    "tokenAmount": 35172.529121457635,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895598662_905775"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895628663,
+    "amount": 0.04828075907134771,
+    "tokenAmount": 46517.569690701435,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895628663_502547"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895644601,
+    "amount": 0.08080139317160956,
+    "tokenAmount": 80426.52216740795,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895644601_593426"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895658663,
+    "amount": 0.016790298273329195,
+    "tokenAmount": 17625.52084710765,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895658663_76814"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895688664,
+    "amount": 0.056827506899334045,
+    "tokenAmount": 56827.50689933405,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895688664_959864"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895704602,
+    "amount": 0.06986088087438683,
+    "tokenAmount": 70610.69757142935,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895704602_814672"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895718664,
+    "amount": 0.019728887806832664,
+    "tokenAmount": 19728.887806832663,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895718664_865815"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895748664,
+    "amount": 0.0441662617796441,
+    "tokenAmount": 43277.68938098891,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895748664_332368"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895764603,
+    "amount": 0.13829962031844195,
+    "tokenAmount": 138299.62031844194,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895764603_421833"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895766105,
+    "amount": 0.1604080160706755,
+    "tokenAmount": 156578.34123038762,
+    "wallet": "GBGEw7dSRDgFf5NSZQ68QdLaCTbNMqPNu13irKAWPGpj",
+    "botType": "volume_3",
+    "status": "completed",
+    "txId": "sim_1742895766105_199454"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895778665,
+    "amount": 0.04744286415522241,
+    "tokenAmount": 47442.864155222414,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895778665_770333"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895808665,
+    "amount": 0.024572601480697228,
+    "tokenAmount": 24883.505810906998,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895808665_874716"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895824604,
+    "amount": 0.09002535334129802,
+    "tokenAmount": 93410.98604528795,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895824604_322457"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895838666,
+    "amount": 0.041928277110565695,
+    "tokenAmount": 41769.182615463,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895838666_833136"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895868666,
+    "amount": 0.018671580442634693,
+    "tokenAmount": 19275.347678470418,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895868666_378610"
+  },
+  {
+    "type": "SELL",
+    "timestamp": 1742895884605,
+    "amount": 0.04997987199479872,
+    "tokenAmount": 48396.649372625856,
+    "wallet": "81VCEbEBX7vGLvHRyGGGrEjgwxvNVhhABSyJxm2fuwp9",
+    "botType": "volume_2",
+    "status": "completed",
+    "txId": "sim_1742895884605_513912"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895898667,
+    "amount": 0.04713294226164198,
+    "tokenAmount": 47132.94226164198,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895898667_67957"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742895928668,
+    "amount": 0.04925842070401538,
+    "tokenAmount": 49258.42070401538,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "sim_1742895928668_223929"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742898444561,
+    "amount": 0.036490530493176014,
+    "tokenAmount": 36490.53049317601,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "simulated_1742898444561"
+  },
+  {
+    "type": "BUY",
+    "timestamp": 1742898813403,
+    "amount": 0.5,
+    "tokenAmount": 500000,
+    "wallet": "9UDiZ6wqcSGRBbSHi9g4KdpaTm7JDdTTXH4G4B1fWHCU",
+    "botType": "volume_1",
+    "status": "completed",
+    "txId": "simulated_1742898813403"
   }
 ]
